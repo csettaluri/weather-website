@@ -80,8 +80,14 @@ app.get('/weather', (req, res) => {
                     return res.send({ error: err2 })
                 } else {
                     return res.send({
-                        location: weatherData.location.name +', ' + weatherData.location.region +', ' + weatherData.location.country,
-                        description:  weatherData.current.weather_descriptions[0] + ' throughout the day. Last observed at ' + weatherData.current.observation_time + '. It is currently ' + weatherData.current.temperature + ' degrees out and it feels like ' + weatherData.current.feelslike + '. There is ' + weatherData.current.precip + '% chance of rain. Wind direction is towards ' + weatherData.current.wind_dir,
+                        location: weatherData.location.name +', ' + weatherData.location.region +
+                        ', ' + weatherData.location.country,
+                        description:  weatherData.current.weather_descriptions[0] + 
+                        ' throughout the day. Last observed at ' + 
+                        weatherData.current.observation_time + '. It is currently ' + 
+                        weatherData.current.temperature + ' degrees out and it feels like ' + 
+                        weatherData.current.feelslike + '. There is ' + weatherData.current.precip + 
+                        '% chance of rain. Wind direction is towards ' + weatherData.current.wind_dir,
                         address: req.query.address
                     })
                 }
