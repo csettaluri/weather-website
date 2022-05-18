@@ -71,16 +71,6 @@ app.get('/weather', (req, res) => {
             error: 'You need to enter an address to get information on the weather...'
         })
     }
-    // geoCode(req.query.address, ({latitude, longitude} = {} ) => {         // Here if there is error, error argument is called but not success.. the parameters won't exist for success call and it'll throw an error for latitude & longitude.. Hence we're providing default parameters
-    //     fetchWeatherInfo(latitude, longitude, (err2, weatherData) => {
-    //         if (err2) {
-    //             return res.send(err2)
-    //         } else {
-    //             console.log(chalk.magenta(weatherData.location.name) +', ' + chalk.magenta(weatherData.location.region) +', ' + chalk.magenta(weatherData.location.country) + '\n' + chalk.cyan(weatherData.current.weather_descriptions[0]) + ' throughout the day. ' + 'It is currently ' + chalk.green(weatherData.current.temperature) + ' degrees out. There is ' + weatherData.current.precip + '% chance of rain.')
-    //         }
-    //     })
-    // })
-    debugger;
     geoCode(req.query.address, (error, {latitude, longitude} = {} ) => {
         if (error) {
             return res.send({ error })
@@ -91,7 +81,7 @@ app.get('/weather', (req, res) => {
                 } else {
                     return res.send({
                         location: weatherData.location.name +', ' + weatherData.location.region +', ' + weatherData.location.country,
-                        description:  weatherData.current.weather_descriptions[0] + ' throughout the day. ' + 'It is currently ' + weatherData.current.temperature + ' degrees out. There is ' + weatherData.current.precip + '% chance of rain.',
+                        description:  weatherData.current.weather_descriptions[0] + ' throughout the day. Last observed at ' + weatherData.current.observation_time + '. It is currently ' + weatherData.current.temperature + ' degrees out and it feels like ' + weatherData.current.feelslike + '. There is ' + weatherData.current.precip + '% chance of rain. Wind direction is towards ' + weatherData.current.wind_dir,
                         address: req.query.address
                     })
                 }
