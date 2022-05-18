@@ -16,6 +16,7 @@ const partialsPath = path.join(__dirname, '../templates/partials')
 // console.log(publicDirectoryPath)  //  To change get the directory for another folder
 
 const app = express()
+const port = process.env.PORT || 3000   // Heroku uses PORT, localhost uses 3000
 
 //  Setup handlebars engine and views location
 app.set('view engine', 'hbs')
@@ -143,6 +144,10 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(3000, () => {        //  Here the argument callback function argument is optional..
-    console.log('Server is up on port 3000.')   // This message to display in terminal/console but not on browser
+// app.listen(3000, () => {        //  Here the argument callback function argument is optional..
+//     console.log('Server is up on port 3000.')   // This message to display in terminal/console but not on browser
+// })
+
+app.listen(port, () => {
+    console.log('Server is up on port ' + port + '...')
 })
